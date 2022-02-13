@@ -9,16 +9,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class KafkaReceiver {
 
-    private static final String topicNameA = "topic-test-a";
-    private static final String topicNameB = "topic-test-b";
+    private static final String topicNameC = "topic-test-c";
 
-    @KafkaListener(topics = topicNameA, groupId = "group-id")
+    @KafkaListener(topics = topicNameC, groupId = "group-id")
     public void listenToA(String message) {
-       log.info("TOPIC A - Received Message: " + message);
+       log.info("TOPIC C - Received Message: " + message);
     }
 
-    @KafkaListener(topics = topicNameB, groupId = "group-id")
-    public void listenToB(String message) {
-        log.info("TOPIC B -Received Message: " + message);
-    }
 }

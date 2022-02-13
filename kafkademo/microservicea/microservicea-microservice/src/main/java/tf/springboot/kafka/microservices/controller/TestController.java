@@ -15,8 +15,11 @@ public class TestController {
 
     private static final String topicNameA = "topic-test-a";
     private static final String topicNameB = "topic-test-b";
+    private static final String topicNameC = "topic-test-c";
 
     private static int numberOfMessages = 100;
+
+    private static Faker faker = new Faker();
 
     @Autowired
     public TestController(KafkaSender kafkaSender){
@@ -26,7 +29,6 @@ public class TestController {
     @RequestMapping(value = "start/topicA", method = RequestMethod.POST)
     public void startA() {
         log.info("Initiating sending kafka messages to topic A, a total of: {}", numberOfMessages);
-        Faker faker = new Faker();
         int count = numberOfMessages;
 
         while (count > 0){
@@ -39,12 +41,23 @@ public class TestController {
     @RequestMapping(value = "start/topicB", method = RequestMethod.POST)
     public void startB() {
         log.info("Initiating sending kafka messages to topic B, a total of: {}", numberOfMessages);
-        Faker faker = new Faker();
         int count = numberOfMessages;
 
         while (count > 0){
             final String msg = count + " - " + faker.name().fullName();
             kafkaSender.sendMessage(topicNameB, msg);
+            count--;
+        }
+    }
+
+    @RequestMapping(value = "start/topicC", method = RequestMethod.POST)
+    public void startC() {
+        log.info("Initiating sending kafka messages to topic C, a total of: {}", numberOfMessages);
+        int count = numberOfMessages;
+
+        while (count > 0){
+            final String msg = count + " - " + faker.address().fullAddress();
+            kafkaSender.sendMessage(topicNameC, msg);
             count--;
         }
     }
