@@ -11,5 +11,6 @@ tf:
       bootstrapServer: "localhost:9093"
       topic: "topic-test"
       groupId: "group-test"
+      topicPattern: "topic-.*"
       producer:
         enabled: true
