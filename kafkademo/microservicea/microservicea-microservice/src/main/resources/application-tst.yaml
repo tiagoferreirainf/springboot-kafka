@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+tf:
+  springboot:
+    kafka:
+      bootstrapServer: ${KAFKA_HOST:"localhost:9093"}
+      topic: ${KAFKA_TOPIC:"topic-test"}
+      groupId: ${KAFKA_GROUP:"group-test"}
+      producer:
+        enabled: true
+

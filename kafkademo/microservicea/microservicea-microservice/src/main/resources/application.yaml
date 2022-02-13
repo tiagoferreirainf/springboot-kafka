@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active: ${RUN_MODE:local}
+
+tf:
+  springboot:
+    kafka:
+      bootstrapServer: "localhost:9093"
+      topic: "topic-test"
+      groupId: "group-test"
+      producer:
+        enabled: true
