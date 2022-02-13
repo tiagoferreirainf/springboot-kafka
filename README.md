@@ -1,5 +1,7 @@
 # springboot-kafka
 
+Small springboot module to be used as a provider for kafka.
+
 ## Project Structure
 The current project has the following structure:
 - __kafkacluster__ - docker composer with a Kafka and Zookeeper, for local tests.
@@ -55,6 +57,7 @@ tf:
       bootstrapServer: "localhost:9093"
       topic: "topic-test"
       groupId: "group-test"
+      topicPattern: "topic-.*"  
       producer:
         enabled: true (disabled by default)
       consumer:
