@@ -26,39 +26,29 @@ public class TestController {
         this.kafkaSender = kafkaSender;
     }
 
+    private void sendLoopOfMessagesToTopic(String topic, String message){
+        int count = numberOfMessages;
+        while (count > 0){
+            kafkaSender.sendMessage(topic, message);
+            count--;
+        }
+    }
+
     @RequestMapping(value = "start/topicA", method = RequestMethod.POST)
     public void startA() {
         log.info("Initiating sending kafka messages to topic A, a total of: {}", numberOfMessages);
-        int count = numberOfMessages;
-
-        while (count > 0){
-            final String msg = count + " - " + faker.animal().name();
-            kafkaSender.sendMessage(topicNameA, msg);
-            count--;
-        }
+        sendLoopOfMessagesToTopic(topicNameA, faker.animal().name());
     }
 
     @RequestMapping(value = "start/topicB", method = RequestMethod.POST)
     public void startB() {
         log.info("Initiating sending kafka messages to topic B, a total of: {}", numberOfMessages);
-        int count = numberOfMessages;
-
-        while (count > 0){
-            final String msg = count + " - " + faker.name().fullName();
-            kafkaSender.sendMessage(topicNameB, msg);
-            count--;
-        }
+        sendLoopOfMessagesToTopic(topicNameB, faker.name().fullName());
     }
 
     @RequestMapping(value = "start/topicC", method = RequestMethod.POST)
     public void startC() {
         log.info("Initiating sending kafka messages to topic C, a total of: {}", numberOfMessages);
-        int count = numberOfMessages;
-
-        while (count > 0){
-            final String msg = count + " - " + faker.address().fullAddress();
-            kafkaSender.sendMessage(topicNameC, msg);
-            count--;
-        }
+        sendLoopOfMessagesToTopic(topicNameC, faker.address().fullAddress());
     }
 }
